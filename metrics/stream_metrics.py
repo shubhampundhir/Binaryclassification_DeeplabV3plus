@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.metrics import confusion_matrix
+import pdb
 
 class _StreamMetrics(object):
     def __init__(self):
@@ -22,65 +23,58 @@ class _StreamMetrics(object):
         """ Overridden by subclasses """
         raise NotImplementedError()      
 
-class StreamSegMetrics(_StreamMetrics):
-    """
-    Stream Metrics for Semantic Segmentation Task
-    """
-    def __init__(self, n_classes):
-        self.n_classes = n_classes
-        self.confusion_matrix = np.zeros((n_classes, n_classes))
+class BinaryClassificationMetrics(object):
+    def __init__(self, threshold=0.5):
+        self.threshold = threshold
+        self.true_positive = 0
+        self.true_negative = 0
+        self.false_positive = 0
+        self.false_negative = 0
 
-    def update(self, label_trues, label_preds):
-        for lt, lp in zip(label_trues, label_preds):
-            self.confusion_matrix += self._fast_hist( lt.flatten(), lp.flatten() )
-    
-    @staticmethod
-    def to_str(results):
-        string = "\n"
-        for k, v in results.items():
-            if k!="Class IoU":
-                string += "%s: %f\n"%(k, v)
-        
-        #string+='Class IoU:\n'
-        #for k, v in results['Class IoU'].items():
-        #    string += "\tclass %d: %f\n"%(k, v)
-        return string
+    def update(self, label_true, label_prob):
+        # Convert probabilities to binary predictions using the threshold
+        label_pred = (label_prob > self.threshold).astype(np.int32)
 
-    def _fast_hist(self, label_true, label_pred):
-        mask = (label_true >= 0) & (label_true < self.n_classes)
-        hist = np.bincount(
-            self.n_classes * label_true[mask].astype(int) + label_pred[mask],
-            minlength=self.n_classes ** 2,
-        ).reshape(self.n_classes, self.n_classes)
-        return hist
+        mask_positive = (label_true == 1)
+        mask_negative = (label_true == 0)
+
+        # Ensure label_pred and mask_positive are 1-dimensional
+        label_pred = label_pred.ravel()
+        mask_positive = mask_positive.ravel()
+
+        self.true_positive += np.sum((label_pred[mask_positive.ravel()] == 1))
+        self.false_negative += np.sum((label_pred[mask_positive.ravel()] == 0))
+        self.true_negative += np.sum((label_pred[mask_negative.ravel()] == 0))
+        self.false_positive += np.sum((label_pred[mask_negative.ravel()] == 1))
+
 
     def get_results(self):
-        """Returns accuracy score evaluation result.
-            - overall accuracy
-            - mean accuracy
-            - mean IU
-            - fwavacc
-        """
-        hist = self.confusion_matrix
-        acc = np.diag(hist).sum() / hist.sum()
-        acc_cls = np.diag(hist) / hist.sum(axis=1)
-        acc_cls = np.nanmean(acc_cls)
-        iu = np.diag(hist) / (hist.sum(axis=1) + hist.sum(axis=0) - np.diag(hist))
-        mean_iu = np.nanmean(iu)
-        freq = hist.sum(axis=1) / hist.sum()
-        fwavacc = (freq[freq > 0] * iu[freq > 0]).sum()
-        cls_iu = dict(zip(range(self.n_classes), iu))
+        precision = self.true_positive / (self.true_positive + self.false_positive + 1e-12)
+        recall = self.true_positive / (self.true_positive + self.false_negative + 1e-12)
+        accuracy = (self.true_positive + self.true_negative) / (self.true_positive + self.true_negative + self.false_positive + self.false_negative + 1e-12
+        )
+        f1_score = 2 * (precision * recall) / (precision + recall + 1e-12)
 
         return {
-                "Overall Acc": acc,
-                "Mean Acc": acc_cls,
-                "FreqW Acc": fwavacc,
-                "Mean IoU": mean_iu,
-                "Class IoU": cls_iu,
-            }
-        
+            "Precision": precision,
+            "Recall": recall,
+            "Accuracy": accuracy,
+            "F1 Score": f1_score,
+        }
+
+
+    def to_str(self, metrics):
+        string = "\n"
+        for k, v in metrics.items():
+            string += "%s: %f\n" % (k, v)
+        return string
+
     def reset(self):
-        self.confusion_matrix = np.zeros((self.n_classes, self.n_classes))
+        self.true_positive = 0
+        self.true_negative = 0
+        self.false_positive = 0
+        self.false_negative = 0
+
 
 class AverageMeter(object):
     """Computes average values"""

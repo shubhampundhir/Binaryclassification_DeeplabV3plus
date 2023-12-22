@@ -1,0 +1,112 @@
+Device: cuda
+Dataset: cityscapes, Train set: 13206, Val set: 1513
+Model restored from /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification_test/checkpoints/CITY_768x768/best_deeplabv3plus_mobilenet_cityscapes_os8.pth
+11it [00:01, 11.56it/s]
+[[7.2689430e-04]
+ [8.9622066e-05]
+ [3.4620693e-01]
+ [7.8281134e-02]]
+[[1.2861970e-03]
+ [3.6152844e-06]
+ [8.8887441e-04]
+ [9.8097724e-01]]
+[[4.8906219e-01]
+ [6.4410444e-05]
+ [9.0164417e-01]
+ [5.7142788e-05]]
+[[0.09971265]
+ [0.9996679 ]
+ [0.99999225]
+ [0.9965274 ]]
+[[1.0283088e-05]
+ [3.5843393e-04]
+ [4.4858736e-01]
+ [8.4779829e-01]]
+[[9.4163215e-01]
+ [9.9948043e-01]
+ [9.9998474e-01]
+ [6.0698850e-04]]
+[[0.02747373]
+ [0.9341739 ]
+ [0.8104423 ]
+ [0.02929365]]
+[[9.5894575e-07]
+ [3.8308306e-05]
+ [9.8540699e-01]
+ [9.9316096e-01]]
+[[1.2799296e-05]
+ [1.0073923e-05]
+ [1.3404933e-02]
+ [8.7795494e-04]]
+[[0.7766945 ]
+ [0.52842706]
+ [0.23777716]
+ [0.999964  ]]
+[[0.98108816]
+ [0.9599596 ]
+ [0.94503874]
+ [0.00105374]]
+[[8.6668405e-07]
+ [9.9992704e-01]
+ [4.9670093e-04]
+ [9.6377265e-01]]
+[[5.1660382e-04]
+ [9.9630296e-01]
+ [5.2288704e-04]
+ [5.6973797e-01]]
+[[0.316893  ]
+ [0.8649914 ]
+ [0.01119244]
+ [0.07605373]]
+[[0.06968605]
+ [0.97547024]
+ [0.02508887]
+ [0.02827159]]
+[[1.0409218e-02]
+ [7.8587335e-01]
+ [1.6127251e-03]
+ [1.7961313e-06]]
+[[0.99996805]
+ [0.08793247]
+ [0.33994797]
+ [0.20508243]]
+[[9.9239701e-01]
+ [3.1188112e-02]
+ [5.3528613e-01]
+ [1.0798972e-06]]
+[[0.96296966]
+ [0.9998647 ]
+ [0.06706271]
+ [0.89636075]]
+[[4.2526964e-03]
+ [9.9553937e-01]
+ [1.4318455e-09]
+20it [00:02,  9.58it/s]
+Traceback (most recent call last):
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/multiprocessing/queues.py", line 245, in _feed
+    send_bytes(obj)
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/multiprocessing/connection.py", line 200, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/multiprocessing/connection.py", line 411, in _send_bytes
+    self._send(header + buf)
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/multiprocessing/connection.py", line 368, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe
+Traceback (most recent call last):
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/multiprocessing/queues.py", line 245, in _feed
+    send_bytes(obj)
+Traceback (most recent call last):
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/multiprocessing/connection.py", line 200, in send_bytes
+    self._send_bytes(m[offset:offset + size])
+  File "main.py", line 367, in <module>
+    main()
+  File "main.py", line 288, in main
+    val_score, ret_samples = validate(opts=opts, model=model, loader=val_loader, device=device, binary_metrics= binary_metrics, ret_samples_ids=vis_sample_id)
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/multiprocessing/connection.py", line 411, in _send_bytes
+    self._send(header + buf)
+  File "main.py", line 144, in validate
+    preds = outputs.cpu().numpy()
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/multiprocessing/connection.py", line 368, in _send
+    n = write(self._handle, buf)
+KeyboardInterrupt
+BrokenPipeError: [Errno 32] Broken pipe

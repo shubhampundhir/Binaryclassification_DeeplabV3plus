@@ -1,0 +1,87 @@
+{
+    "os": "Linux-5.0.0-19-generic-x86_64-with-glibc2.10",
+    "python": "3.8.0",
+    "heartbeatAt": "2023-12-13T09:18:41.754829",
+    "startedAt": "2023-12-13T09:18:40.932099",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--model",
+        "deeplabv3plus_mobilenet",
+        "--vis_port",
+        "28333",
+        "--gpu_id",
+        "0",
+        "--crop_val",
+        "--lr",
+        "0.001",
+        "--crop_size",
+        "718",
+        "--batch_size",
+        "4",
+        "--output_stride",
+        "8",
+        "--ckpt",
+        "/home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/checkpoints/CITY_768x768/best_deeplabv3plus_mobilenet_cityscapes_os8.pth",
+        "--test_only"
+    ],
+    "state": "running",
+    "program": "main.py",
+    "codePathLocal": "main.py",
+    "codePath": "main.py",
+    "git": {
+        "remote": "https://github.com/VainF/DeepLabV3Plus-Pytorch.git",
+        "commit": "c8cc7b28efb3c520df4c45f1eec4ad1b4a18e362"
+    },
+    "email": "shubhampundhir1999@gmail.com",
+    "root": "/home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification_test",
+    "host": "iiitd-C7Z170-SQ",
+    "username": "shubhamp",
+    "executable": "/home/shubhamp/anaconda3/envs/deeplearning/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 2.9,
+        "min": 800.0,
+        "max": 3600.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2.9,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2.9,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2.9,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 2.9,
+            "min": 800.0,
+            "max": 3600.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 916.7688674926758,
+            "used": 536.2431564331055
+        }
+    },
+    "gpu": "NVIDIA GeForce GTX 1080 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1080 Ti",
+            "memory_total": 11811160064
+        }
+    ],
+    "memory": {
+        "total": 47.121280670166016
+    }
+}

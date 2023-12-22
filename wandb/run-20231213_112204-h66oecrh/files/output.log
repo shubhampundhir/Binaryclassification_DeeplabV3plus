@@ -1,0 +1,34 @@
+Device: cuda
+Dataset: cityscapes, Train set: 233, Val set: 758
+Model restored from /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification_test/checkpoints/CITY_768x768/best_deeplabv3plus_mobilenet_cityscapes_os8.pth
+21it [00:02, 10.44it/s]
+Traceback (most recent call last):
+  File "main.py", line 364, in <module>
+    main()
+  File "main.py", line 284, in main
+    val_score, ret_samples = validate(opts=opts, model=model, loader=val_loader, device=device, binary_metrics= binary_metrics, ret_samples_ids=vis_sample_id)
+  File "main.py", line 138, in validate
+    for i, (images, labels) in tqdm(enumerate(loader)):
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/tqdm/std.py", line 1178, in __iter__
+    for obj in iterable:
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 1333, in _next_data
+    return self._process_data(data)
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 1359, in _process_data
+    data.reraise()
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/torch/_utils.py", line 543, in reraise
+    raise exception
+PIL.UnidentifiedImageError: Caught UnidentifiedImageError in DataLoader worker process 1.
+Original Traceback (most recent call last):
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/torch/utils/data/_utils/worker.py", line 302, in _worker_loop
+    data = fetcher.fetch(index)
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 58, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 58, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification_test/datasets/cityscapes.py", line 116, in __getitem__
+    image = Image.open(self.images[index]).convert('RGB')
+  File "/home/shubhamp/anaconda3/envs/deeplearning/lib/python3.8/site-packages/PIL/Image.py", line 3305, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file '/home/shubhamp/Downloads/finaldata_test/data/leftImg8bit/val/city0/.amlignore.amltmp'

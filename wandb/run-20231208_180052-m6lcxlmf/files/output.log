@@ -1,0 +1,68 @@
+Device: cuda
+Dataset: cityscapes, Train set: 233, Val set: 59
+Model restored from /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/checkpoints/CITY_768x768/best_deeplabv3plus_mobilenet_cityscapes_os8.pth
+9it [00:01,  9.56it/s]
+Image Name: PE-UP-7086-90_2_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-41886-59_2_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-24580-85_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-24581-62_2_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-7119-157_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-31556-124_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-58867-79_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-56349-135_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-56349-132_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-7208-107_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-63912-56_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-45960-164_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-7119-157_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-64484-169_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-7219-57_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-58867-79_2_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-31211-195_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-31556-124_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-31211-195_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-56349-135_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-7086-90_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-24581-62_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-49702-101_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-63912-56_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-64484-169_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-69203-59_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-69203-59_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-41886-59_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-UP-45960-164_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-UP-49702-101_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-85836-48_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-80712-57_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-56589-53_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-77494-44_2_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-75465-62_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-79835-33_2_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-48327-44_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-79835-33_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-77494-44_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-76304-88_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-84330-27_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-76300-48_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-78278-31_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-76953-54_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-76464-76_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-79981-83_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-80712-57_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-48327-44_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-50052-149_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-76300-48_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-76296-34_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-78278-31_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-70455-140_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-78678-62_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-78678-62_1_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-56589-53_2_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-81613-52_1_leftImg8bit, Predicted Label: 0.0
+Image Name: PE-RJ-79981-83_2_leftImg8bit, Predicted Label: 1.0
+Image Name: PE-RJ-76953-54_1_leftImg8bit, Predicted Label: 1.0
+Precision: 0.805556
+Recall: 1.000000
+Accuracy: 0.881356
+
+15it [00:01,  8.06it/s]

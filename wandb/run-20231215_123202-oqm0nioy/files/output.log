@@ -1,0 +1,11 @@
+Device: cuda
+Dataset: cityscapes, Train set: 13206, Val set: 1513
+[!] Retrain
+Epoch 1, Itrs 100/10000, Loss=0.686350
+Epoch 1, Itrs 200/10000, Loss=0.615276
+Traceback (most recent call last):
+  File "main.py", line 368, in <module>
+    main()
+  File "main.py", line 319, in main
+    np_loss = loss.detach().cpu().numpy()
+KeyboardInterrupt

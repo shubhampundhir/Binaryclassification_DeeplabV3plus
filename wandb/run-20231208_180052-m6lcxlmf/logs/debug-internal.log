@@ -1,0 +1,252 @@
+2023-12-08 18:00:52,813 INFO    StreamThr :8343 [internal.py:wandb_internal():86] W&B internal server running at pid: 8343, started at: 2023-12-08 18:00:52.812864
+2023-12-08 18:00:52,817 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: status
+2023-12-08 18:00:52,818 INFO    WriterThread:8343 [datastore.py:open_for_write():85] open: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/run-m6lcxlmf.wandb
+2023-12-08 18:00:52,818 DEBUG   SenderThread:8343 [sender.py:send():380] send: header
+2023-12-08 18:00:52,828 DEBUG   SenderThread:8343 [sender.py:send():380] send: run
+2023-12-08 18:00:53,565 INFO    SenderThread:8343 [dir_watcher.py:__init__():211] watching files in: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files
+2023-12-08 18:00:53,565 INFO    SenderThread:8343 [sender.py:_start_run_threads():1124] run started: m6lcxlmf with start time 1702038652.812001
+2023-12-08 18:00:53,595 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: check_version
+2023-12-08 18:00:53,596 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: check_version
+2023-12-08 18:00:53,652 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: run_start
+2023-12-08 18:00:53,663 DEBUG   HandlerThread:8343 [system_info.py:__init__():32] System info init
+2023-12-08 18:00:53,664 DEBUG   HandlerThread:8343 [system_info.py:__init__():47] System info init done
+2023-12-08 18:00:53,664 INFO    HandlerThread:8343 [system_monitor.py:start():194] Starting system monitor
+2023-12-08 18:00:53,664 INFO    SystemMonitor:8343 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2023-12-08 18:00:53,665 INFO    HandlerThread:8343 [system_monitor.py:probe():214] Collecting system info
+2023-12-08 18:00:53,666 INFO    SystemMonitor:8343 [interfaces.py:start():190] Started cpu monitoring
+2023-12-08 18:00:53,667 INFO    SystemMonitor:8343 [interfaces.py:start():190] Started disk monitoring
+2023-12-08 18:00:53,669 INFO    SystemMonitor:8343 [interfaces.py:start():190] Started gpu monitoring
+2023-12-08 18:00:53,669 INFO    SystemMonitor:8343 [interfaces.py:start():190] Started memory monitoring
+2023-12-08 18:00:53,671 INFO    SystemMonitor:8343 [interfaces.py:start():190] Started network monitoring
+2023-12-08 18:00:53,700 DEBUG   HandlerThread:8343 [system_info.py:probe():196] Probing system
+2023-12-08 18:00:53,708 DEBUG   HandlerThread:8343 [system_info.py:_probe_git():181] Probing git
+2023-12-08 18:00:53,728 DEBUG   HandlerThread:8343 [system_info.py:_probe_git():189] Probing git done
+2023-12-08 18:00:53,728 DEBUG   HandlerThread:8343 [system_info.py:probe():244] Probing system done
+2023-12-08 18:00:53,729 DEBUG   HandlerThread:8343 [system_monitor.py:probe():223] {'os': 'Linux-5.0.0-19-generic-x86_64-with-glibc2.10', 'python': '3.8.0', 'heartbeatAt': '2023-12-08T12:30:53.700662', 'startedAt': '2023-12-08T12:30:52.808203', 'docker': None, 'cuda': None, 'args': ('--model', 'deeplabv3plus_mobilenet', '--vis_port', '28333', '--gpu_id', '0', '--crop_val', '--lr', '0.001', '--crop_size', '718', '--batch_size', '4', '--output_stride', '8', '--ckpt', '/home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/checkpoints/CITY_768x768/best_deeplabv3plus_mobilenet_cityscapes_os8.pth', '--test_only'), 'state': 'running', 'program': 'main.py', 'codePathLocal': 'main.py', 'codePath': 'main.py', 'git': {'remote': 'https://github.com/VainF/DeepLabV3Plus-Pytorch.git', 'commit': 'c8cc7b28efb3c520df4c45f1eec4ad1b4a18e362'}, 'email': 'shubhampundhir1999@gmail.com', 'root': '/home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification', 'host': 'iiitd-C7Z170-SQ', 'username': 'shubhamp', 'executable': '/home/shubhamp/anaconda3/envs/deeplearning/bin/python', 'cpu_count': 4, 'cpu_count_logical': 4, 'cpu_freq': {'current': 1.4, 'min': 800.0, 'max': 3600.0}, 'cpu_freq_per_core': [{'current': 1.4, 'min': 800.0, 'max': 3600.0}, {'current': 1.4, 'min': 800.0, 'max': 3600.0}, {'current': 1.4, 'min': 800.0, 'max': 3600.0}, {'current': 1.4, 'min': 800.0, 'max': 3600.0}], 'disk': {'/': {'total': 916.7688674926758, 'used': 533.3012504577637}}, 'gpu': 'NVIDIA GeForce GTX 1080 Ti', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce GTX 1080 Ti', 'memory_total': 11811160064}], 'memory': {'total': 47.121280670166016}}
+2023-12-08 18:00:53,729 INFO    HandlerThread:8343 [system_monitor.py:probe():224] Finished collecting system info
+2023-12-08 18:00:53,729 INFO    HandlerThread:8343 [system_monitor.py:probe():227] Publishing system info
+2023-12-08 18:00:53,729 DEBUG   HandlerThread:8343 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2023-12-08 18:00:53,730 DEBUG   HandlerThread:8343 [system_info.py:_save_pip():68] Saving pip packages done
+2023-12-08 18:00:53,730 DEBUG   HandlerThread:8343 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2023-12-08 18:00:54,567 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/requirements.txt
+2023-12-08 18:00:54,567 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/conda-environment.yaml
+2023-12-08 18:00:56,181 DEBUG   HandlerThread:8343 [system_info.py:_save_conda():87] Saving conda packages done
+2023-12-08 18:00:56,182 INFO    HandlerThread:8343 [system_monitor.py:probe():229] Finished publishing system info
+2023-12-08 18:00:56,184 DEBUG   SenderThread:8343 [sender.py:send():380] send: files
+2023-12-08 18:00:56,184 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-metadata.json with policy now
+2023-12-08 18:00:56,190 DEBUG   SenderThread:8343 [sender.py:send():380] send: telemetry
+2023-12-08 18:00:56,222 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: stop_status
+2023-12-08 18:00:56,223 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: stop_status
+2023-12-08 18:00:56,225 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-08 18:00:56,566 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/conda-environment.yaml
+2023-12-08 18:00:56,566 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/wandb-metadata.json
+2023-12-08 18:00:56,566 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/output.log
+2023-12-08 18:00:57,348 INFO    wandb-upload_0:8343 [upload_job.py:push():131] Uploaded file /tmp/tmp4p_l445uwandb/yhb4fgft-wandb-metadata.json
+2023-12-08 18:00:58,251 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: status_report
+2023-12-08 18:00:58,252 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,253 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,254 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,254 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,330 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,330 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,330 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,331 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,398 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,399 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,399 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,400 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,465 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,466 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,466 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,466 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,534 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,535 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,535 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,535 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,566 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/output.log
+2023-12-08 18:00:58,566 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_created():271] file/dir created: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/wandb-summary.json
+2023-12-08 18:00:58,597 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,598 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,598 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,598 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,660 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,660 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,661 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,661 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,725 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,726 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,726 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,741 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,790 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,791 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,791 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,792 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,854 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,862 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,862 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,863 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,920 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,921 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,921 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,921 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:58,985 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:58,986 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:58,986 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:58,986 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:59,053 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:59,054 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:59,054 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:59,055 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:59,119 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:59,120 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:59,120 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:59,120 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:59,170 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: partial_history
+2023-12-08 18:00:59,175 DEBUG   SenderThread:8343 [sender.py:send():380] send: history
+2023-12-08 18:00:59,175 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: summary_record
+2023-12-08 18:00:59,175 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:59,199 DEBUG   SenderThread:8343 [sender.py:send():380] send: exit
+2023-12-08 18:00:59,199 INFO    SenderThread:8343 [sender.py:send_exit():585] handling exit code: 0
+2023-12-08 18:00:59,199 INFO    SenderThread:8343 [sender.py:send_exit():587] handling runtime: 5
+2023-12-08 18:00:59,199 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:59,200 INFO    SenderThread:8343 [sender.py:send_exit():593] send defer
+2023-12-08 18:00:59,200 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:00:59,200 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 0
+2023-12-08 18:00:59,201 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:00:59,202 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 0
+2023-12-08 18:00:59,202 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 1
+2023-12-08 18:00:59,202 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:00:59,202 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 1
+2023-12-08 18:00:59,202 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:00:59,202 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 1
+2023-12-08 18:00:59,202 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 2
+2023-12-08 18:00:59,202 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:00:59,202 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 2
+2023-12-08 18:00:59,202 INFO    HandlerThread:8343 [system_monitor.py:finish():203] Stopping system monitor
+2023-12-08 18:00:59,203 INFO    HandlerThread:8343 [interfaces.py:finish():202] Joined cpu monitor
+2023-12-08 18:00:59,203 INFO    HandlerThread:8343 [interfaces.py:finish():202] Joined disk monitor
+2023-12-08 18:00:59,208 DEBUG   SystemMonitor:8343 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2023-12-08 18:00:59,208 DEBUG   SystemMonitor:8343 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2023-12-08 18:00:59,209 DEBUG   SystemMonitor:8343 [system_monitor.py:_start():183] Publishing last batch of metrics
+2023-12-08 18:00:59,290 INFO    HandlerThread:8343 [interfaces.py:finish():202] Joined gpu monitor
+2023-12-08 18:00:59,290 INFO    HandlerThread:8343 [interfaces.py:finish():202] Joined memory monitor
+2023-12-08 18:00:59,290 INFO    HandlerThread:8343 [interfaces.py:finish():202] Joined network monitor
+2023-12-08 18:00:59,291 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:00:59,291 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 2
+2023-12-08 18:00:59,291 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 3
+2023-12-08 18:00:59,291 DEBUG   SenderThread:8343 [sender.py:send():380] send: stats
+2023-12-08 18:00:59,291 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:00:59,291 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 3
+2023-12-08 18:00:59,292 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:00:59,292 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 3
+2023-12-08 18:00:59,292 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 4
+2023-12-08 18:00:59,292 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:00:59,292 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 4
+2023-12-08 18:00:59,292 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:00:59,292 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 4
+2023-12-08 18:00:59,293 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 5
+2023-12-08 18:00:59,293 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:00:59,293 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 5
+2023-12-08 18:00:59,294 DEBUG   SenderThread:8343 [sender.py:send():380] send: summary
+2023-12-08 18:00:59,294 INFO    SenderThread:8343 [sender.py:_save_file():1380] saving file wandb-summary.json with policy end
+2023-12-08 18:00:59,294 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:00:59,294 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 5
+2023-12-08 18:00:59,294 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 6
+2023-12-08 18:00:59,294 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:00:59,295 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 6
+2023-12-08 18:00:59,295 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:00:59,295 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 6
+2023-12-08 18:00:59,299 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: status_report
+2023-12-08 18:00:59,567 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/output.log
+2023-12-08 18:00:59,567 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/wandb-summary.json
+2023-12-08 18:00:59,666 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 7
+2023-12-08 18:00:59,666 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:00:59,666 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 7
+2023-12-08 18:00:59,666 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:00:59,666 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 7
+2023-12-08 18:01:00,199 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: poll_exit
+2023-12-08 18:01:00,567 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/output.log
+2023-12-08 18:01:00,567 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/config.yaml
+2023-12-08 18:01:01,354 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 8
+2023-12-08 18:01:01,355 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: poll_exit
+2023-12-08 18:01:01,356 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:01:01,356 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 8
+2023-12-08 18:01:01,357 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:01:01,357 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 8
+2023-12-08 18:01:01,357 INFO    SenderThread:8343 [job_builder.py:build():298] Attempting to build job artifact
+2023-12-08 18:01:01,359 INFO    SenderThread:8343 [job_builder.py:_get_source_type():428] is repo sourced job
+2023-12-08 18:01:01,387 INFO    SenderThread:8343 [job_builder.py:build():404] adding wandb-job metadata file
+2023-12-08 18:01:01,428 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 9
+2023-12-08 18:01:01,429 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:01:01,429 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 9
+2023-12-08 18:01:01,430 DEBUG   SenderThread:8343 [sender.py:send():380] send: artifact
+2023-12-08 18:01:01,568 INFO    Thread-12 :8343 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/output.log
+2023-12-08 18:01:03,517 INFO    wandb-upload_1:8343 [upload_job.py:push():86] Skipped uploading /home/shubhamp/.local/share/wandb/artifacts/staging/tmpf72ydu4i
+2023-12-08 18:01:04,008 INFO    wandb-upload_0:8343 [upload_job.py:push():89] Uploaded file /home/shubhamp/.local/share/wandb/artifacts/staging/tmpo40gftm1
+2023-12-08 18:01:05,202 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: keepalive
+2023-12-08 18:01:05,864 INFO    SenderThread:8343 [sender.py:send_artifact():1458] sent artifact job-https___github.com_VainF_DeepLabV3Plus-Pytorch.git_main.py - {'id': 'QXJ0aWZhY3Q6NjYxNDU2NTA5', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjEyMTkzOTU0Mg==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NjYxNDU0Njg2', 'versionIndex': 1}}}
+2023-12-08 18:01:05,865 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:01:05,865 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 9
+2023-12-08 18:01:05,865 INFO    SenderThread:8343 [dir_watcher.py:finish():358] shutting down directory watcher
+2023-12-08 18:01:05,866 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: status_report
+2023-12-08 18:01:06,569 INFO    SenderThread:8343 [dir_watcher.py:finish():388] scan: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files
+2023-12-08 18:01:06,570 INFO    SenderThread:8343 [dir_watcher.py:finish():402] scan save: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/requirements.txt requirements.txt
+2023-12-08 18:01:06,570 INFO    SenderThread:8343 [dir_watcher.py:finish():402] scan save: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/conda-environment.yaml conda-environment.yaml
+2023-12-08 18:01:06,570 INFO    SenderThread:8343 [dir_watcher.py:finish():402] scan save: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/wandb-summary.json wandb-summary.json
+2023-12-08 18:01:06,570 INFO    SenderThread:8343 [dir_watcher.py:finish():402] scan save: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/output.log output.log
+2023-12-08 18:01:06,572 INFO    SenderThread:8343 [dir_watcher.py:finish():402] scan save: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/wandb-metadata.json wandb-metadata.json
+2023-12-08 18:01:06,574 INFO    SenderThread:8343 [dir_watcher.py:finish():402] scan save: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/config.yaml config.yaml
+2023-12-08 18:01:06,575 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 10
+2023-12-08 18:01:06,578 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:01:06,578 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 10
+2023-12-08 18:01:06,579 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:01:06,579 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 10
+2023-12-08 18:01:06,579 INFO    SenderThread:8343 [file_pusher.py:finish():175] shutting down file pusher
+2023-12-08 18:01:07,261 INFO    wandb-upload_2:8343 [upload_job.py:push():131] Uploaded file /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/wandb-summary.json
+2023-12-08 18:01:07,365 INFO    wandb-upload_3:8343 [upload_job.py:push():131] Uploaded file /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/output.log
+2023-12-08 18:01:07,380 INFO    wandb-upload_4:8343 [upload_job.py:push():131] Uploaded file /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/config.yaml
+2023-12-08 18:01:07,388 INFO    wandb-upload_1:8343 [upload_job.py:push():131] Uploaded file /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/requirements.txt
+2023-12-08 18:01:07,425 INFO    wandb-upload_0:8343 [upload_job.py:push():131] Uploaded file /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/files/conda-environment.yaml
+2023-12-08 18:01:07,625 INFO    Thread-11 :8343 [sender.py:transition_state():613] send defer: 11
+2023-12-08 18:01:07,626 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:01:07,626 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 11
+2023-12-08 18:01:07,626 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:01:07,627 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 11
+2023-12-08 18:01:07,627 INFO    SenderThread:8343 [file_pusher.py:join():181] waiting for file pusher
+2023-12-08 18:01:07,627 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 12
+2023-12-08 18:01:07,627 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:01:07,627 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 12
+2023-12-08 18:01:07,627 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:01:07,627 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 12
+2023-12-08 18:01:07,627 INFO    SenderThread:8343 [file_stream.py:finish():595] file stream finish called
+2023-12-08 18:01:07,959 INFO    SenderThread:8343 [file_stream.py:finish():599] file stream finish is done
+2023-12-08 18:01:07,959 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 13
+2023-12-08 18:01:07,959 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:01:07,959 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 13
+2023-12-08 18:01:07,959 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:01:07,959 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 13
+2023-12-08 18:01:07,959 INFO    SenderThread:8343 [sender.py:transition_state():613] send defer: 14
+2023-12-08 18:01:07,959 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: defer
+2023-12-08 18:01:07,959 INFO    HandlerThread:8343 [handler.py:handle_request_defer():172] handle defer: 14
+2023-12-08 18:01:07,960 DEBUG   SenderThread:8343 [sender.py:send():380] send: final
+2023-12-08 18:01:07,960 DEBUG   SenderThread:8343 [sender.py:send():380] send: footer
+2023-12-08 18:01:07,960 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: defer
+2023-12-08 18:01:07,960 INFO    SenderThread:8343 [sender.py:send_request_defer():609] handle sender defer: 14
+2023-12-08 18:01:07,961 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: poll_exit
+2023-12-08 18:01:07,961 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: server_info
+2023-12-08 18:01:07,961 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: get_summary
+2023-12-08 18:01:07,961 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: poll_exit
+2023-12-08 18:01:07,962 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: sampled_history
+2023-12-08 18:01:07,962 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: server_info
+2023-12-08 18:01:07,962 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: internal_messages
+2023-12-08 18:01:07,964 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: job_info
+2023-12-08 18:01:08,254 DEBUG   SenderThread:8343 [sender.py:send_request():407] send_request: job_info
+2023-12-08 18:01:08,254 INFO    MainThread:8343 [wandb_run.py:_footer_history_summary_info():3760] rendering history
+2023-12-08 18:01:08,255 INFO    MainThread:8343 [wandb_run.py:_footer_history_summary_info():3792] rendering summary
+2023-12-08 18:01:08,255 INFO    MainThread:8343 [wandb_run.py:_footer_sync_info():3719] logging synced files
+2023-12-08 18:01:08,255 DEBUG   HandlerThread:8343 [handler.py:handle_request():146] handle_request: shutdown
+2023-12-08 18:01:08,255 INFO    HandlerThread:8343 [handler.py:finish():866] shutting down handler
+2023-12-08 18:01:08,965 INFO    WriterThread:8343 [datastore.py:close():294] close: /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/wandb/run-20231208_180052-m6lcxlmf/run-m6lcxlmf.wandb
+2023-12-08 18:01:09,254 INFO    SenderThread:8343 [sender.py:finish():1536] shutting down sender
+2023-12-08 18:01:09,254 INFO    SenderThread:8343 [file_pusher.py:finish():175] shutting down file pusher
+2023-12-08 18:01:09,254 INFO    SenderThread:8343 [file_pusher.py:join():181] waiting for file pusher

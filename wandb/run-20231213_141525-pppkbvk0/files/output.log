@@ -1,0 +1,12 @@
+Device: cuda
+Dataset: cityscapes, Train set: 233, Val set: 1513
+Model restored from /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification/checkpoints/CITY_768x768/best_deeplabv3plus_mobilenet_cityscapes_os8.pth
+0it [00:00, ?it/s]
+Traceback (most recent call last):
+  File "main.py", line 365, in <module>
+    main()
+  File "main.py", line 285, in main
+    val_score, ret_samples = validate(opts=opts, model=model, loader=val_loader, device=device, binary_metrics= binary_metrics, ret_samples_ids=vis_sample_id)
+  File "main.py", line 159, in validate
+    wandb.log(score)
+UnboundLocalError: local variable 'score' referenced before assignment

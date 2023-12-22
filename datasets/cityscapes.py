@@ -4,6 +4,7 @@ from collections import namedtuple
 
 import torch
 import torch.utils.data as data
+from torchvision import transforms
 from PIL import Image
 import numpy as np
 
@@ -107,24 +108,40 @@ class Cityscapes(data.Dataset):
 
     @classmethod
     def decode_target(cls, target):
-        target[target == 255] = 19
-        #target = target.astype('uint8') + 1
+        # target[target == 255] = 19
+        target = target.astype('uint8') + 1
         return cls.train_id_to_color[target]
 
+
     def __getitem__(self, index):
-        """
-        Args:
-            index (int): Index
-        Returns:
-            tuple: (image, target) where target is a tuple of all target types if target_type is a list with more
-            than one item. Otherwise target is a json object if target_type="polygon", else the image segmentation.
-        """
-        image = Image.open(self.images[index]).convert('RGB')
-        target = Image.open(self.targets[index])
-        if self.transform:
-            image, target = self.transform(image, target)
-        target = self.encode_target(target)
+        try:
+            image = Image.open(self.images[index]).convert('RGB')
+        except (Image.UnidentifiedImageError, OSError):
+            # Handle UnidentifiedImageError or OSError (skip the problematic image)
+            print(f"Skipping UnidentifiedImageError at index {index}")
+            return self.__getitem__((index + 1) % len(self))
+
+        target_folder = os.path.dirname(self.targets[index])
+        
+        # Assign class labels based on folder structure
+        target_class = 0 if 'city0' in target_folder else 1
+
+        # Resize the image to a consistent size
+        resize_transform = transforms.Resize((512, 384))
+        image = resize_transform(image)
+
+        # Convert image to tensor
+        image = transforms.ToTensor()(image)
+
+        # Convert target to tensor (0 or 1)
+        target = torch.tensor([target_class], dtype=torch.float32)
+        
+        # Print image name and label assigned
+        # print("Image Name:", os.path.basename(self.images[index]))
+        # print("Assigned Label:", target_class)
+        
         return image, target
+
 
     def __len__(self):
         return len(self.images)
@@ -138,7 +155,7 @@ class Cityscapes(data.Dataset):
         if target_type == 'instance':
             return '{}_instanceIds.png'.format(mode)
         elif target_type == 'semantic':
-            return '{}_labelIds.png'.format(mode)
+            return '{}_labelIds_binarylabelid.png'.format(mode)  # Assuming binary labels are saved as binarylabelid.png
         elif target_type == 'color':
             return '{}_color.png'.format(mode)
         elif target_type == 'polygon':

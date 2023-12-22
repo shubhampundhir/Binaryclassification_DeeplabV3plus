@@ -7,9 +7,9 @@ import argparse
 import numpy as np
 
 from torch.utils import data
-from datasets import VOCSegmentation, Cityscapes
+from datasets import Cityscapes
 from utils import ext_transforms as et
-from metrics import StreamSegMetrics
+from metrics import BinaryClassificationMetrics
 
 import torch
 import torch.nn as nn
@@ -18,15 +18,21 @@ from utils.visualizer import Visualizer
 from PIL import Image
 import matplotlib
 import matplotlib.pyplot as plt
+import pdb
+import wandb
 
 
 def get_argparser():
     parser = argparse.ArgumentParser()
 
-    # Datset Options
-    parser.add_argument("--data_root", type=str, default='./datasets/data',
+    # Dataset Options
+    parser.add_argument("--data_root", type=str, default='/home/shubhamp/Downloads/finaldata_test/data',
                         help="path to Dataset")
-    parser.add_argument("--dataset", type=str, default='voc',
+    parser.add_argument("--active_list", type=str, default=None, help="path to Dataset")
+
+    parser.add_argument("--save_path",type=str,default='CITY_768x768',help="name of folder to save checkpoint")
+
+    parser.add_argument("--dataset", type=str, default='cityscapes',
                         choices=['voc', 'cityscapes'], help='Name of dataset')
     parser.add_argument("--num_classes", type=int, default=None,
                         help="num classes (default: None)")
@@ -46,23 +52,22 @@ def get_argparser():
     parser.add_argument("--test_only", action='store_true', default=False)
     parser.add_argument("--save_val_results", action='store_true', default=False,
                         help="save segmentation results to \"./results\"")
-    parser.add_argument("--total_itrs", type=int, default=30e3,
+    parser.add_argument("--total_itrs", type=int, default=5000,
                         help="epoch number (default: 30k)")
     parser.add_argument("--lr", type=float, default=0.01,
                         help="learning rate (default: 0.01)")
     parser.add_argument("--lr_policy", type=str, default='poly', choices=['poly', 'step'],
                         help="learning rate scheduler policy")
-    parser.add_argument("--step_size", type=int, default=10000)
+    parser.add_argument("--step_size", type=int, default=1000)
     parser.add_argument("--crop_val", action='store_true', default=False,
                         help='crop validation (default: False)')
-    parser.add_argument("--batch_size", type=int, default=16,
+    parser.add_argument("--batch_size", type=int, default=8,
                         help='batch size (default: 16)')
     parser.add_argument("--val_batch_size", type=int, default=4,
                         help='batch size for validation (default: 4)')
-    parser.add_argument("--crop_size", type=int, default=513)
+    parser.add_argument("--crop_size", type=int, default=768)
 
-    parser.add_argument("--ckpt", default=None, type=str,
-                        help="restore from checkpoint")
+    parser.add_argument("--ckpt", default=None, type=str,help="restore from checkpoint")
     parser.add_argument("--continue_training", action='store_true', default=False)
 
     parser.add_argument("--loss_type", type=str, default='cross_entropy',
@@ -73,9 +78,9 @@ def get_argparser():
                         help='weight decay (default: 1e-4)')
     parser.add_argument("--random_seed", type=int, default=1,
                         help="random seed (default: 1)")
-    parser.add_argument("--print_interval", type=int, default=10,
+    parser.add_argument("--print_interval", type=int, default=100,
                         help="print interval of loss (default: 10)")
-    parser.add_argument("--val_interval", type=int, default=100,
+    parser.add_argument("--val_interval", type=int, default=1000,
                         help="epoch interval for eval (default: 100)")
     parser.add_argument("--download", action='store_true', default=False,
                         help="download datasets")
@@ -99,38 +104,9 @@ def get_argparser():
 def get_dataset(opts):
     """ Dataset And Augmentation
     """
-    if opts.dataset == 'voc':
-        train_transform = et.ExtCompose([
-            # et.ExtResize(size=opts.crop_size),
-            et.ExtRandomScale((0.5, 2.0)),
-            et.ExtRandomCrop(size=(opts.crop_size, opts.crop_size), pad_if_needed=True),
-            et.ExtRandomHorizontalFlip(),
-            et.ExtToTensor(),
-            et.ExtNormalize(mean=[0.485, 0.456, 0.406],
-                            std=[0.229, 0.224, 0.225]),
-        ])
-        if opts.crop_val:
-            val_transform = et.ExtCompose([
-                et.ExtResize(opts.crop_size),
-                et.ExtCenterCrop(opts.crop_size),
-                et.ExtToTensor(),
-                et.ExtNormalize(mean=[0.485, 0.456, 0.406],
-                                std=[0.229, 0.224, 0.225]),
-            ])
-        else:
-            val_transform = et.ExtCompose([
-                et.ExtToTensor(),
-                et.ExtNormalize(mean=[0.485, 0.456, 0.406],
-                                std=[0.229, 0.224, 0.225]),
-            ])
-        train_dst = VOCSegmentation(root=opts.data_root, year=opts.year,
-                                    image_set='train', download=opts.download, transform=train_transform)
-        val_dst = VOCSegmentation(root=opts.data_root, year=opts.year,
-                                  image_set='val', download=False, transform=val_transform)
-
     if opts.dataset == 'cityscapes':
         train_transform = et.ExtCompose([
-            # et.ExtResize( 512 ),
+            et.ExtResize(( 512,384 )),
             et.ExtRandomCrop(size=(opts.crop_size, opts.crop_size)),
             et.ExtColorJitter(brightness=0.5, contrast=0.5, saturation=0.5),
             et.ExtRandomHorizontalFlip(),
@@ -140,72 +116,58 @@ def get_dataset(opts):
         ])
 
         val_transform = et.ExtCompose([
-            # et.ExtResize( 512 ),
+            et.ExtResize(( 512,384 )),
             et.ExtToTensor(),
             et.ExtNormalize(mean=[0.485, 0.456, 0.406],
                             std=[0.229, 0.224, 0.225]),
         ])
 
-        train_dst = Cityscapes(root=opts.data_root,
-                               split='train', transform=train_transform)
-        val_dst = Cityscapes(root=opts.data_root,
-                             split='val', transform=val_transform)
+        train_dst = Cityscapes(root=opts.data_root, split='train', transform=train_transform)
+        val_dst = Cityscapes(root=opts.data_root, split='val', transform=val_transform)
+        
     return train_dst, val_dst
 
-
-def validate(opts, model, loader, device, metrics, ret_samples_ids=None):
+# UPDATED SAVE_VAL RESULTS
+def validate(opts, model, loader, device, binary_metrics, ret_samples_ids=None):
     """Do validation and return specified samples"""
-    metrics.reset()
+
+    binary_metrics.reset()
     ret_samples = []
-    if opts.save_val_results:
-        if not os.path.exists('results'):
-            os.mkdir('results')
-        denorm = utils.Denormalize(mean=[0.485, 0.456, 0.406],
-                                   std=[0.229, 0.224, 0.225])
-        img_id = 0
 
     with torch.no_grad():
         for i, (images, labels) in tqdm(enumerate(loader)):
-
             images = images.to(device, dtype=torch.float32)
-            labels = labels.to(device, dtype=torch.long)
+            labels = labels.to(device, dtype=torch.float32)
 
             outputs = model(images)
-            preds = outputs.detach().max(dim=1)[1].cpu().numpy()
+            preds = (outputs > 0.5).float()  # Apply threshold for binary classification
+            preds = outputs.cpu().numpy()
             targets = labels.cpu().numpy()
 
-            metrics.update(targets, preds)
-            if ret_samples_ids is not None and i in ret_samples_ids:  # get vis samples
-                ret_samples.append(
-                    (images[0].detach().cpu().numpy(), targets[0], preds[0]))
+            binary_metrics.update(targets, preds)
 
-            if opts.save_val_results:
-                for i in range(len(images)):
-                    image = images[i].detach().cpu().numpy()
-                    target = targets[i]
-                    pred = preds[i]
+            for j in range(len(images)):
+                img_path = loader.dataset.images[i * opts.val_batch_size + j]  # Corrected line
 
-                    image = (denorm(image) * 255).transpose(1, 2, 0).astype(np.uint8)
-                    target = loader.dataset.decode_target(target).astype(np.uint8)
-                    pred = loader.dataset.decode_target(pred).astype(np.uint8)
+                # Extract the actual image name from the path
+                img_name = os.path.splitext(os.path.basename(img_path))[0]
 
-                    Image.fromarray(image).save('results/%d_image.png' % img_id)
-                    Image.fromarray(target).save('results/%d_target.png' % img_id)
-                    Image.fromarray(pred).save('results/%d_pred.png' % img_id)
+                # Print the image name and predicted label
+                # print(f"Image Name: {img_name}, Predicted Label: {preds[j][0]}")
 
-                    fig = plt.figure()
-                    plt.imshow(image)
-                    plt.axis('off')
-                    plt.imshow(pred, alpha=0.7)
-                    ax = plt.gca()
-                    ax.xaxis.set_major_locator(matplotlib.ticker.NullLocator())
-                    ax.yaxis.set_major_locator(matplotlib.ticker.NullLocator())
-                    plt.savefig('results/%d_overlay.png' % img_id, bbox_inches='tight', pad_inches=0)
-                    plt.close()
-                    img_id += 1
+            # Log metrics to WandB
+            metrics = binary_metrics.get_results()
 
-        score = metrics.get_results()
+            # Log individual metrics
+            wandb.log({"Accuracy": metrics["Accuracy"], "Step": i})
+            wandb.log({"Precision": metrics["Precision"], "Step": i})
+            wandb.log({"Recall": metrics["Recall"], "Step": i})
+            wandb.log({"F1 Score": metrics["F1 Score"], "Step": i})
+
+    score = binary_metrics.get_results()
     return score, ret_samples
+
+
 
 
 def main():
@@ -213,7 +175,12 @@ def main():
     if opts.dataset.lower() == 'voc':
         opts.num_classes = 21
     elif opts.dataset.lower() == 'cityscapes':
-        opts.num_classes = 19
+        opts.num_classes = 2 #Binary classification
+
+
+    # Initialize wandb
+    wandb.init(project="deeplabv3plus_binaryclassification_15kVal", name="Val_loss_visualization", config=vars(opts))
+
 
     # Setup visualization
     vis = Visualizer(port=opts.vis_port,
@@ -231,15 +198,18 @@ def main():
     random.seed(opts.random_seed)
 
     # Setup dataloader
-    if opts.dataset == 'voc' and not opts.crop_val:
+    if opts.dataset == 'cityscapes' and not opts.crop_val:
         opts.val_batch_size = 1
 
     train_dst, val_dst = get_dataset(opts)
+
     train_loader = data.DataLoader(
         train_dst, batch_size=opts.batch_size, shuffle=True, num_workers=2,
         drop_last=True)  # drop_last=True to ignore single-image batches.
+
     val_loader = data.DataLoader(
         val_dst, batch_size=opts.val_batch_size, shuffle=True, num_workers=2)
+
     print("Dataset: %s, Train set: %d, Val set: %d" %
           (opts.dataset, len(train_dst), len(val_dst)))
 
@@ -249,8 +219,8 @@ def main():
         network.convert_to_separable_conv(model.classifier)
     utils.set_bn_momentum(model.backbone, momentum=0.01)
 
-    # Set up metrics
-    metrics = StreamSegMetrics(opts.num_classes)
+    # Set up binary classification metrics
+    binary_metrics = BinaryClassificationMetrics()
 
     # Set up optimizer
     optimizer = torch.optim.SGD(params=[
@@ -314,57 +284,70 @@ def main():
 
     if opts.test_only:
         model.eval()
-        val_score, ret_samples = validate(
-            opts=opts, model=model, loader=val_loader, device=device, metrics=metrics, ret_samples_ids=vis_sample_id)
-        print(metrics.to_str(val_score))
+        val_score, ret_samples = validate(opts=opts, model=model, loader=val_loader, device=device, binary_metrics= binary_metrics, ret_samples_ids=vis_sample_id)
+        print(binary_metrics.to_str(val_score))
         return
 
+    if not os.path.exists('checkpoints/'+opts.save_path):
+        os.makedirs('checkpoints/'+opts.save_path)
+
     interval_loss = 0
+    binary_criterion = nn.BCEWithLogitsLoss()
     while True:  # cur_itrs < opts.total_itrs:
         # =====  Train  =====
         model.train()
+
         cur_epochs += 1
+
         for (images, labels) in train_loader:
             cur_itrs += 1
 
             images = images.to(device, dtype=torch.float32)
-            labels = labels.to(device, dtype=torch.long)
+            labels = labels.to(device, dtype=torch.float32)
 
             optimizer.zero_grad()
             outputs = model(images)
-            loss = criterion(outputs, labels)
+            # print("shape:",outputs.shape)
+
+            # binary_preds = (outputs > 0.5).float()
+            # print("binary probability:",binary_preds)
+
+            loss = binary_criterion(outputs, labels)  # binary loss
             loss.backward()
             optimizer.step()
 
             np_loss = loss.detach().cpu().numpy()
             interval_loss += np_loss
+
+             # Add after the loss calculation
+            wandb.log({"Training Loss": np_loss, "Step": cur_itrs})
+
             if vis is not None:
                 vis.vis_scalar('Loss', cur_itrs, np_loss)
 
-            if (cur_itrs) % 10 == 0:
-                interval_loss = interval_loss / 10
+            if (cur_itrs) % opts.print_interval == 0:
                 print("Epoch %d, Itrs %d/%d, Loss=%f" %
-                      (cur_epochs, cur_itrs, opts.total_itrs, interval_loss))
-                interval_loss = 0.0
-
+                  (cur_epochs, cur_itrs, opts.total_itrs, np_loss))
+                
             if (cur_itrs) % opts.val_interval == 0:
-                save_ckpt('checkpoints/latest_%s_%s_os%d.pth' %
-                          (opts.model, opts.dataset, opts.output_stride))
+                save_ckpt('checkpoints/'+opts.save_path+'/latest_%s_%s_os%d.pth' %
+                      (opts.model, opts.dataset, opts.output_stride))
                 print("validation...")
                 model.eval()
                 val_score, ret_samples = validate(
-                    opts=opts, model=model, loader=val_loader, device=device, metrics=metrics,
+                    opts=opts, model=model, loader=val_loader, device=device, binary_metrics= binary_metrics,
                     ret_samples_ids=vis_sample_id)
-                print(metrics.to_str(val_score))
-                if val_score['Mean IoU'] > best_score:  # save best model
-                    best_score = val_score['Mean IoU']
-                    save_ckpt('checkpoints/best_%s_%s_os%d.pth' %
-                              (opts.model, opts.dataset, opts.output_stride))
+                print(binary_metrics.to_str(val_score))
+                print('Best score till now:', best_score)
+
+                if val_score['Accuracy'] > best_score:  # save best model
+                    best_score = val_score['Accuracy']
+                    save_ckpt('checkpoints/'+opts.save_path+'/best_%s_%s_os%d.pth' %
+                          (opts.model, opts.dataset, opts.output_stride))
+
 
                 if vis is not None:  # visualize validation score and samples
-                    vis.vis_scalar("[Val] Overall Acc", cur_itrs, val_score['Overall Acc'])
-                    vis.vis_scalar("[Val] Mean IoU", cur_itrs, val_score['Mean IoU'])
-                    vis.vis_table("[Val] Class IoU", val_score['Class IoU'])
+                    vis.vis_scalar("[Val] Overall Acc", cur_itrs, val_score['Accuracy'])
 
                     for k, (img, target, lbl) in enumerate(ret_samples):
                         img = (denorm(img) * 255).astype(np.uint8)
@@ -373,10 +356,10 @@ def main():
                         concat_img = np.concatenate((img, target, lbl), axis=2)  # concat along width
                         vis.vis_image('Sample %d' % k, concat_img)
                 model.train()
-            scheduler.step()
+        scheduler.step()
 
-            if cur_itrs >= opts.total_itrs:
-                return
+        if cur_itrs >= opts.total_itrs:
+            return
 
 
 if __name__ == '__main__':

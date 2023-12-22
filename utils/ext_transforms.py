@@ -1,4 +1,5 @@
 import collections
+import collections.abc
 import torchvision
 import torch
 import torchvision.transforms.functional as F
@@ -6,6 +7,7 @@ import random
 import numbers
 import numpy as np
 from PIL import Image
+from torchvision.transforms import InterpolationMode
 
 
 #
@@ -94,7 +96,7 @@ class ExtCenterCrop(object):
 
 
 class ExtRandomScale(object):
-    def __init__(self, scale_range, interpolation=Image.BILINEAR):
+    def __init__(self, scale_range, interpolation=InterpolationMode.BILINEAR):
         self.scale_range = scale_range
         self.interpolation = interpolation
 
@@ -110,11 +112,12 @@ class ExtRandomScale(object):
         assert img.size == lbl.size
         scale = random.uniform(self.scale_range[0], self.scale_range[1])
         target_size = ( int(img.size[1]*scale), int(img.size[0]*scale) )
-        return F.resize(img, target_size, self.interpolation), F.resize(lbl, target_size, Image.NEAREST)
+        return F.resize(img, target_size, self.interpolation), F.resize(lbl, target_size, InterpolationMode.NEAREST)
 
     def __repr__(self):
-        interpolate_str = _pil_interpolation_to_str[self.interpolation]
-        return self.__class__.__name__ + '(size={0}, interpolation={1})'.format(self.size, interpolate_str)
+        interpolate_str = str(self.interpolation).split('.')[-1]  # Extract the enum value as a string
+        return self.__class__.__name__ + '(size={0}, interpolation={1})'.format(self.scale_range, interpolate_str)
+
 
 class ExtScale(object):
     """Resize the input PIL Image to the given scale.
@@ -124,7 +127,7 @@ class ExtScale(object):
             ``PIL.Image.BILINEAR``
     """
 
-    def __init__(self, scale, interpolation=Image.BILINEAR):
+    def __init__(self, scale, interpolation=InterpolationMode.BILINEAR):
         self.scale = scale
         self.interpolation = interpolation
 
@@ -139,11 +142,12 @@ class ExtScale(object):
         """
         assert img.size == lbl.size
         target_size = ( int(img.size[1]*self.scale), int(img.size[0]*self.scale) ) # (H, W)
-        return F.resize(img, target_size, self.interpolation), F.resize(lbl, target_size, Image.NEAREST)
+        return F.resize(img, target_size, self.interpolation), F.resize(lbl, target_size, InterpolationMode.NEAREST)
 
     def __repr__(self):
-        interpolate_str = _pil_interpolation_to_str[self.interpolation]
-        return self.__class__.__name__ + '(size={0}, interpolation={1})'.format(self.size, interpolate_str)
+        interpolate_str = str(self.interpolation).split('.')[-1]  # Extract the enum value as a string
+        return self.__class__.__name__ + '(size={0}, interpolation={1})'.format(self.scale_range, interpolate_str)
+
 
 
 class ExtRandomRotation(object):
@@ -352,19 +356,20 @@ class ExtRandomCrop(object):
     def get_params(img, output_size):
         """Get parameters for ``crop`` for a random crop.
         Args:
-            img (PIL Image): Image to be cropped.
-            output_size (tuple): Expected output size of the crop.
+        img (PIL Image): Image to be cropped.
+        output_size (tuple): Expected output size of the crop.
         Returns:
-            tuple: params (i, j, h, w) to be passed to ``crop`` for random crop.
+        tuple: params (i, j, h, w) to be passed to ``crop`` for random crop.
         """
         w, h = img.size
         th, tw = output_size
         if w == tw and h == th:
             return 0, 0, h, w
 
-        i = random.randint(0, h - th)
-        j = random.randint(0, w - tw)
+        i = random.randint(0, max(0, h - th))
+        j = random.randint(0, max(0, w - tw))
         return i, j, th, tw
+
 
     def __call__(self, img, lbl):
         """
@@ -410,8 +415,8 @@ class ExtResize(object):
             ``PIL.Image.BILINEAR``
     """
 
-    def __init__(self, size, interpolation=Image.BILINEAR):
-        assert isinstance(size, int) or (isinstance(size, collections.Iterable) and len(size) == 2)
+    def __init__(self, size, interpolation=InterpolationMode.BILINEAR):
+        assert isinstance(size, int) or (isinstance(size, collections.abc.Iterable) and len(size) == 2)
         self.size = size
         self.interpolation = interpolation
 
@@ -422,11 +427,12 @@ class ExtResize(object):
         Returns:
             PIL Image: Rescaled image.
         """
-        return F.resize(img, self.size, self.interpolation), F.resize(lbl, self.size, Image.NEAREST)
+        return F.resize(img, self.size, self.interpolation), F.resize(lbl, self.size, InterpolationMode.NEAREST)
 
     def __repr__(self):
-        interpolate_str = _pil_interpolation_to_str[self.interpolation]
-        return self.__class__.__name__ + '(size={0}, interpolation={1})'.format(self.size, interpolate_str) 
+        interpolate_str = str(self.interpolation).split('.')[-1]  # Extract the enum value as a string
+        return self.__class__.__name__ + '(size={0}, interpolation={1})'.format(self.scale_range, interpolate_str)
+ 
     
 class ExtColorJitter(object):
     """Randomly change the brightness, contrast and saturation of an image.

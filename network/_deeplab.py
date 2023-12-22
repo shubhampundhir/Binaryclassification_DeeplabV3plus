@@ -26,7 +26,7 @@ class DeepLabV3(_SimpleSegmentationModel):
     pass
 
 class DeepLabHeadV3Plus(nn.Module):
-    def __init__(self, in_channels, low_level_channels, num_classes, aspp_dilate=[12, 24, 36]):
+    def __init__(self, in_channels, low_level_channels, num_classes, num_binary_classes, aspp_dilate=[12, 24, 36]):
         super(DeepLabHeadV3Plus, self).__init__()
         self.project = nn.Sequential( 
             nn.Conv2d(low_level_channels, 48, 1, bias=False),
@@ -35,20 +35,31 @@ class DeepLabHeadV3Plus(nn.Module):
         )
 
         self.aspp = ASPP(in_channels, aspp_dilate)
-
+        
+        # # Binary classification branch
         self.classifier = nn.Sequential(
             nn.Conv2d(304, 256, 3, padding=1, bias=False),
             nn.BatchNorm2d(256),
             nn.ReLU(inplace=True),
-            nn.Conv2d(256, num_classes, 1)
+            nn.Conv2d(256, num_classes, 1),
+            nn.AdaptiveAvgPool2d(1),  # Replace Flatten with AdaptiveAvgPool2d
+            nn.Flatten(),  # Flatten the tensor
+            nn.Linear(num_classes, 1),  # Update input size            
+            nn.Sigmoid()  # Add sigmoid activation for binary classification
         )
+        
         self._init_weight()
 
     def forward(self, feature):
-        low_level_feature = self.project( feature['low_level'] )
+        low_level_feature = self.project(feature['low_level'])
         output_feature = self.aspp(feature['out'])
         output_feature = F.interpolate(output_feature, size=low_level_feature.shape[2:], mode='bilinear', align_corners=False)
-        return self.classifier( torch.cat( [ low_level_feature, output_feature ], dim=1 ) )
+
+        concatenated_features = torch.cat([low_level_feature, output_feature], dim=1)
+        # print("Concatenated features size:", concatenated_features.shape)
+        # print(self.classifier(concatenated_features))    
+        return self.classifier(concatenated_features)
+
     
     def _init_weight(self):
         for m in self.modules():
@@ -176,3 +187,5 @@ def convert_to_separable_conv(module):
     for name, child in module.named_children():
         new_module.add_module(name, convert_to_separable_conv(child))
     return new_module
+
+

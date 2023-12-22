@@ -1,0 +1,19 @@
+Device: cuda
+Dataset: cityscapes, Train set: 13206, Val set: 1513
+Model restored from /home/shubhamp/Downloads/DeepLabV3Plus-binaryclassification_test/checkpoints/CITY_768x768/best_deeplabv3plus_mobilenet_cityscapes_os8.pth
+
+
+
+
+
+
+
+
+
+
+
+379it [00:23, 16.24it/s]
+Precision: 0.854257
+Recall: 0.783069
+Accuracy: 0.824851
+F1 Score: 0.817115

@@ -1,0 +1,131 @@
+wandb_version: 1
+
+data_root:
+  desc: null
+  value: /home/shubhamp/Downloads/finaldata_test/data
+active_list:
+  desc: null
+  value: null
+save_path:
+  desc: null
+  value: CITY_768x768
+dataset:
+  desc: null
+  value: cityscapes
+num_classes:
+  desc: null
+  value: 2
+model:
+  desc: null
+  value: deeplabv3plus_mobilenet
+separable_conv:
+  desc: null
+  value: false
+output_stride:
+  desc: null
+  value: 8
+test_only:
+  desc: null
+  value: false
+save_val_results:
+  desc: null
+  value: false
+total_itrs:
+  desc: null
+  value: 10000
+lr:
+  desc: null
+  value: 0.001
+lr_policy:
+  desc: null
+  value: poly
+step_size:
+  desc: null
+  value: 1000
+crop_val:
+  desc: null
+  value: true
+batch_size:
+  desc: null
+  value: 4
+val_batch_size:
+  desc: null
+  value: 4
+crop_size:
+  desc: null
+  value: 718
+ckpt:
+  desc: null
+  value: null
+continue_training:
+  desc: null
+  value: false
+loss_type:
+  desc: null
+  value: cross_entropy
+gpu_id:
+  desc: null
+  value: '0'
+weight_decay:
+  desc: null
+  value: 0.0001
+random_seed:
+  desc: null
+  value: 1
+print_interval:
+  desc: null
+  value: 100
+val_interval:
+  desc: null
+  value: 1000
+download:
+  desc: null
+  value: false
+year:
+  desc: null
+  value: '2012'
+enable_vis:
+  desc: null
+  value: false
+vis_port:
+  desc: null
+  value: '28333'
+vis_env:
+  desc: null
+  value: main
+vis_num_samples:
+  desc: null
+  value: 8
+_wandb:
+  desc: null
+  value:
+    python_version: 3.8.0
+    cli_version: 0.16.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1702623105.060603
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 51
+      - 53
+      - 55
+      2:
+      - 1
+      - 5
+      - 41
+      - 51
+      - 53
+      - 55
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.8.0
+      5: 0.16.0
+      8:
+      - 5
+      13: linux-x86_64
